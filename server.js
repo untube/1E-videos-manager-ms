@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-var port = 4000;
+var port = 3001;
 var bodyParser = require('body-parser');
 const config = require('./db');
 
@@ -35,14 +35,14 @@ mongoose.connect(config.DB, function(err, db) {
 });
 
 var videoSchemaJSON = {
+    user_id:Number,
     fieldname: String,
     originalname:String,
     encoding: String,
     mimetype: String,
     destination: String,
     filename: String,
-    path: String,
-    size: {type:Number,max:[10000000000,"tamaño max superado"]},
+    size: {type:Number,max:[50000000,"tamaño max superado"]},
     data:String
 };
 
@@ -73,6 +73,7 @@ app.post('/upload',upload.single('file'), function(req, res) {
     video.save()
         .then(item => {
             res.send("Video saved to database ");
+            console.log(req)
         })
         .catch(err => {
             res.status(400).send("Unable to save to database "+err);
@@ -81,6 +82,30 @@ app.post('/upload',upload.single('file'), function(req, res) {
         Video.find({},function(err,docs){
             console.log(docs)
         })
+});
+
+app.post('/uploadVideo', function(req, res) {
+    mongoose.connect(config.DB, function(err, db) {
+        if(err) {
+            console.log('database is not connected')
+        }
+        else {
+            console.log('connected!!'+err)
+        }
+    });
+    var video = new Video(req.body);
+
+    video.save()
+    .then(item => {
+        console.log("Video saved to database ");
+    })
+    .catch(err => {
+        console.log("Unable to save to database "+err);
+    });
+
+    console.log(video)
+    res.send(req.body)
+
 });
 
 app.listen(port, () => {
