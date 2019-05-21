@@ -1,0 +1,103 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Microservice for Video Playing and Search
+  description: node js + Mongo
+  license:
+    name: Software Architecture, 2019-I
+host: 192.168.99.101:3001
+basePath: /uploadVideo
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /categories:
+    post:
+      summary: Creates a new category
+      operationId: CreateCategory
+      parameters:
+        - name: category
+          in: body
+          required: true
+          description: Category Object
+          schema:
+            $ref: '#/definitions/CategoryInput'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+
+definitions:
+
+          
+    # Videos
+  Video:
+    type: object
+    properties:
+      id:
+        type: string
+      user_id:
+        type: integer
+      title: 
+        type: string
+      destination:
+        type: string
+      size:
+        type: integer
+      filename:
+        type: string
+      originalname:
+        type: string
+      encoding:
+        type: string
+      fieldname:
+        type: string
+      mimetype:
+        type: string
+        
+  VideoInput:
+    type: object
+    properties:
+      user_id:
+        type: integer
+      title: 
+        type: string
+      destination:
+        type: string
+      encoding:
+        type: string
+      fieldname:
+        type: string
+      originlname: 
+        type: string
+      size: 
+        type: integer
+
+
+
+# Errors
+  ErrorModel:
+    type: object
+    required:
+      - message
+      - id
+    properties:
+      message:
+        type: string
+      id:
+        type: number
+      description:
+        type: object
