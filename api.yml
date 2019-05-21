@@ -16,17 +16,17 @@ consumes:
 produces:
   - application/json
 paths:
-  /categories:
+  /uploadVideo:
     post:
-      summary: Creates a new category
-      operationId: CreateCategory
+      summary: upload video
+      operationId: upload video
       parameters:
-        - name: category
+        - name: upload
           in: body
           required: true
           description: Category Object
           schema:
-            $ref: '#/definitions/CategoryInput'
+            $ref: '#/definitions'
       responses:
         '201':
           description: Created
