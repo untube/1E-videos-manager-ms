@@ -37,13 +37,16 @@ mongoose.connect(config.DB, function(err, db) {
 
 var videoSchemaJSON = {
     user_id:Number,
+    category_id:String,
+    title:String,
+    description:String,
+    destination: String,
+    views:Number,
+    size: {type:Number,max:[50000000,"tamaño max superado"]},
     fieldname: String,
     originalname:String,
     encoding: String,
-    mimetype: String,
-    destination: String,
     filename: String,
-    size: {type:Number,max:[50000000,"tamaño max superado"]},
     data:String
 };
 
@@ -99,6 +102,7 @@ app.post('/uploadVideo', function(req, res) {
     video.save()
     .then(item => {
         console.log("Video saved to database ");
+        
     })
     .catch(err => {
         console.log("Unable to save to database "+err);
