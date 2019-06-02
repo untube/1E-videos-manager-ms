@@ -1,15 +1,9 @@
 version: "2"
 services:
-  app:
-    container_name:  1E-videos-manager-ms-1
+  videos-manager-ms:
+    container_name:  videos-manager-ms
     restart: always
     build: .
     ports:
       - "3001:3001"
-    links:
-      - mongo
-  mongo:
-    container_name: 1E-videos-videos-db-1
-    image: mongo
-    ports:
-      - "27017:27017"
+
