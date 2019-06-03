@@ -4,6 +4,18 @@ var app = express();
 var port = 3001;
 var bodyParser = require('body-parser');
 const config = require('./db');
+const path = require('path');
+const multer = require('multer');
+
+let storage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,'./videos')
+    },
+    filename:(req,file, cb)=>{
+        cb(null,file.fieldname+"-"+Date.now()+path.extname(file.originalname));
+    }
+})
+const upload = multer({storage:storage});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,18 +23,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-const multer = require("multer");
-
-let storage = multer.diskStorage({
-    destination:(req, file, cb)=>{
-        cb(null,'./video')
-    },
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname);
-    }
+app.post('/subir',upload.single('file'),(req, res)=>{
+    console.log(req.hostname,req.file.path)
+    return res.send(req.file)
 })
 
-const upload = multer({ storage });
+
 
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
@@ -55,6 +61,7 @@ var Video = mongoose.model("Video", videoSchemaJSON);
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
+
 app.post('/upload',upload.single('file'), function(req, res) {
     mongoose.connect(config.DB, function(err, db) {
         if(err) {
