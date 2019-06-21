@@ -1,3 +1,3 @@
 module.exports = {
-    DB: 'mongodb://34.73.94.91:27017/videos_db'
+    DB: 'mongodb://35.196.3.185:27017/videos_db'
 }
