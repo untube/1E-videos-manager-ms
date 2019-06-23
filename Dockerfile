@@ -1,6 +1,6 @@
 FROM node:7
 WORKDIR /video_manager
-COPY package.json /app
+COPY package.json /video_manager
 RUN npm install
 RUN mkdir videos
 RUN mkdir imagenes
