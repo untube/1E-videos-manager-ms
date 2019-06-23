@@ -114,7 +114,7 @@ app.post('/upload/:user_id/:category_id/:title/:description', upload.single('fil
    });
  });
 
- app.get('/catagolo', (req, res) => {
+ app.get('/catalogo', (req, res) => {
   Video.find({},{title:1,video_id:1},function(err,docs){
     console.log(docs)
     res.json(docs)
