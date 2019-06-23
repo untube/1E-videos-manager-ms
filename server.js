@@ -27,7 +27,7 @@ let gfs;
 conn.once('open', () => {
   // Init stream
   gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('uploads');
+  gfs.collection('files');
 });
 
 // Create storage engine
@@ -38,7 +38,7 @@ const storage = new GridFsStorage({
         const filename = file.originalname;
         const fileInfo = {
           filename: filename,
-          bucketName: 'uploads'
+          bucketName: 'files'
         };
         resolve(fileInfo);
     });
@@ -171,7 +171,7 @@ app.get('/files/:_id', (req, res) => {
 
 
 
-var Video = conn.model("Video", videoSchemaJSON);
+var Video = conn.model("video", videoSchemaJSON);
 
 // @route DELETE /files/:id
 // @desc  Delete file
