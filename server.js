@@ -27,7 +27,7 @@ let gfs;
 conn.once('open', () => {
   // Init stream
   gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('files');
+  gfs.collection('videos');
 });
 
 // Create storage engine
@@ -37,8 +37,7 @@ const storage = new GridFsStorage({
     return new Promise((resolve, reject) => {
         const filename = file.originalname;
         const fileInfo = {
-          filename: filename,
-          bucketName: 'files'
+          filename: filename
         };
         resolve(fileInfo);
     });
