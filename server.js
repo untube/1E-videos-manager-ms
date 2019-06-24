@@ -7,7 +7,7 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 var fs = require('fs');
-const DB = 'mongodb://35.196.3.185:27017/video_db';
+const DB = 'mongodb://35.196.3.185:27017/videos_db';
 const app = express();
 
 // Middleware
