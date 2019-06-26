@@ -1,3 +1,3 @@
 module.exports = {
-    DB: 'mongodb://35.196.3.185:27017/mongodb'
+    DB: 'mongodb://mongodb/mongodb'
 }
