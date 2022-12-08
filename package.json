@@ -4,7 +4,7 @@
     "@types/fluent-ffmpeg": "^2.1.9",
     "body-parser": "^1.18.2",
     "ejs": "^2.5.8",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "ffmpeg": "0.0.4",
     "fluent-ffmpeg": "^2.1.2",
     "gridfs": "^1.0.0",
